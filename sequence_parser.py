@@ -53,10 +53,12 @@ def save_seq(sequences, gene_name, count):
     output_folder = "Sequences"
     output_file = os.path.join(output_folder, f"{gene_name}.fasta")
     with open(output_file, "w") as file:
-        for i, sequence in enumerate(sequences):
-            file.write(f">Sequence_{i+1}\n")
+        for sequence in sequences:
             file.write(sequence + "\n")
-
+        #Do i want to have it be labeled??? if so,
+        # for i, sequence in enumerate(sequences):
+        #     file.write(f">Sequence_{i+1}\n")
+        #     file.write(sequence + "\n")
 
 def process_input_folder(input_folder):
     """
@@ -83,7 +85,6 @@ def process_input_folder(input_folder):
 
 #input folder name:
 input_folder = "Input"
-
 
 process_input_folder(input_folder)
 
