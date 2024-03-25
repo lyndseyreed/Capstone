@@ -36,15 +36,11 @@ def tokenized_sequences(file_path):
             tokenized_sequences.append(tokenized_sequence)
     return tokenized_sequences
 
-file_path = "Sequences/P40121.fasta"
 
-tokenized_input = tokenized_sequences(file_path)
-
-tokenized_tensor = torch.cat(tokenized_input, dim=0)
 
 #use torch for model outputs
-with torch.no_grad():
-    output = model(tokenized_tensor)
+# with torch.no_grad():
+#     output = model(tokenized_tensor)
 
 #convert model output to PDB file - ESMFold repo function
 
