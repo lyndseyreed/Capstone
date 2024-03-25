@@ -8,7 +8,7 @@
 
 import os
 import torch
-from sequence_parser import get_sequences as get_seq
+#from sequence_parser import get_sequences as get_seq
 
 
 #Load in model and tokenizer
@@ -27,15 +27,29 @@ model.trunk.set_chunk_size(64)
 
 ##WORKS UP TO HERE###
 
+#tokenize input sequences from file
+def tokenized_sequences(file_path):
+    tokenized_sequences = []
+    with open(file_path, "r") as file:
+        for sequence in file:
+            tokenized_sequence = tokenizer([sequence], return_tensors="pt", add_special_tokens=False)['input_ids']
+            tokenized_sequences.append(tokenized_sequence)
+    return tokenized_sequences
 
+file_path = "Sequences/P40121.fasta"
 
-#Pull out sequence from sequences folder by file
-#make each sequence in one file a variable to be modelled
-#tokenize the input sequnece
-#move token to GPU
+tokenized_input = tokenized_sequences(file_path)
+
+tokenized_tensor = torch.cat(tokenized_input, dim=0)
+
 #use torch for model outputs
+with torch.no_grad():
+    output = model(tokenized_tensor)
+
 #convert model output to PDB file - ESMFold repo function
+
 # from transformers.models.esm.openfold_utils.protein import to_pdb, Protein as OFProtein
+
 # from transformers.models.esm.openfold_utils.feats import atom14_to_atom37
 
 # def convert_outputs_to_pdb(outputs):
