@@ -4,7 +4,7 @@ from dash_bio.utils import PdbParser, create_mol3d_style
 
 app = Dash(__name__)
 
-parser = PdbParser('https://git.io/4K8X.pdb')
+parser = PdbParser('Tokens/P40121/P40121_sequence1.pdb')
 
 data = parser.mol3d_data()
 styles = create_mol3d_style(
