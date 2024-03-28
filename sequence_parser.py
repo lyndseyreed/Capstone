@@ -80,4 +80,11 @@ def process_input_folder(input_folder):
 
 
 
-####USER I
+####USER INPUT AREA####
+#Will be added to main eventually#
+
+#input folder name:
+input_folder = "Input"
+
+process_input_folder(input_folder)
+

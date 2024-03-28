@@ -63,7 +63,7 @@ def tokenize_sequences(input_folder, output_folder):
                 # tokenized_sequences.append(token_model)
                 print('token_model', token_model)
                 pdb = convert_to_pdb(token_model)
-                print('pdb, pdb)
+                print('pdb', pdb)
                 output_file = os.path.join(gene_folder, f"{gene_name}_sequence{i+1}.pdb")
                 torch.save(pdb, output_file)
     # return tokenized_sequences
