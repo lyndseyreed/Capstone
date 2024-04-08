@@ -45,9 +45,20 @@ def convert_to_pdb(outputs):
     return pdbs
 
 #tokenize input sequences from file
+def remove_first_line(input_file, output_file):
+    with open(input_file, "rb") as f_input:
+        # Skip the first line
+        next(f_input)
+        # Read the rest of the lines
+        lines = f_input.readlines()
+    
+    # Write the remaining lines to the output file
+    with open(output_file, "w") as f_output:
+        f_output.writelines(lines)
 
+
+        
 def tokenize_sequences(input_folder, output_folder):
-    # tokenized_sequences = []
     for filename in os.listdir(input_folder):
         input_file = os.path.join(input_folder, filename)
         gene_name = os.path.splitext(filename)[0]
@@ -57,21 +68,12 @@ def tokenize_sequences(input_folder, output_folder):
             for i, line in enumerate(file):
                 sequence = line.strip()
                 tokenized_sequence = tokenizer(sequence, return_tensors="pt", add_special_tokens=False)['input_ids']
-                print('token', tokenized_sequence)
                 with torch.no_grad():
                     token_model = model(tokenized_sequence)
-                # tokenized_sequences.append(token_model)
-                print('token_model', token_model)
                 pdb = convert_to_pdb(token_model)
-                print('pdb', pdb)
                 output_file = os.path.join(gene_folder, f"{gene_name}_sequence{i+1}.pdb")
                 torch.save(pdb, output_file)
-    # return tokenized_sequences
 
 
-# Path to the input file containing protein sequences
-input_folder = "Sequences"
-# Path to the folder where tokenized sequences will be saved
-output_folder = "Tokens"
-# Tokenize sequences from the file and save them to the output folder
-tokenized_sequences = tokenize_sequences(input_folder, output_folder)
+
+# Path to the input file containi
