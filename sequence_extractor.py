@@ -55,10 +55,6 @@ def save_seq(sequences, gene_name, count):
     with open(output_file, "w") as file:
         for sequence in sequences:
             file.write(sequence + "\n")
-        #Do i want to have it be labeled??? if so,
-        # for i, sequence in enumerate(sequences):
-        #     file.write(f">Sequence_{i+1}\n")
-        #     file.write(sequence + "\n")
 
 def process_input_folder(input_folder):
     """

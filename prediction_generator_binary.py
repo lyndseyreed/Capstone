@@ -76,9 +76,4 @@ def tokenize_sequences(input_folder, output_folder):
 
 
 
-# Path to the input file containing protein sequences
-input_folder = "Sequences"
-# Path to the folder where tokenized sequences will be saved
-output_folder = "Tokens"
-# Tokenize sequences from the file and save them to the output folder
-tokenized_sequences = tokenize_sequences(input_folder, output_folder)
+# Path to the input file containi

@@ -7,8 +7,6 @@ add something to sequence_parser to handle special characters-- not readable in 
 
 address the issue of only being able to proteins under 400 length
 
-figure out tokenizer when there are different sequence lengths
-
 remove print in the sequence parser
 
 Order or Operations:

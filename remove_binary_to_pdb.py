@@ -13,13 +13,4 @@ def remove_binary(input_folder, output_folder):
             input_file_path = os.path.join(root, filename)
             output_file_path = os.path.join(output_root, filename)
             with open(input_file_path, "rb") as input_file:
-                # Read all lines except the first and last two lines
-                lines = input_file.readlines()[1:-2]
-            with open(output_file_path, "wb") as output_file:
-                # Write the remaining lines to the output file
-                output_file.writelines(lines)
-
-# Example usage:
-input_folder = "Tokens"  
-output_folder = "PDB" 
-remove_binary(input_folder, output_folder)
+    
