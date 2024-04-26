@@ -1,28 +1,37 @@
 ##Using ESMFold API, input the sequences extracted from sequence_parser and obtain a pdb file with predictied 3D structure##
 
-##Input - list of aa sequences with canonical as the first sequence in the list
-    ##Use ESMFold API to predict the structures of the sequences
-##Output - pdb file to input into 3D modeller
+##Input - folder containing multiple files (Sequences). The expected format within the file is a
+            #list of aa sequences with the canonical sequence as the first sequence in the list
+            #and all other sequences in the file as the novel that correspond to the same gene
+
+##Use - ESMFold API to predict the atomic locations for the 3D structures of the sequences
+
+##Output - pdb files in the same folder format (Tokens) - one gene per file- to input into 3D modeller API
+# Note: must pass this output through remove_binary_to_pdb for functionality in model_generator
+
+
 
 # pip install --upgrade biopython transformers accelerate
-
 import os
 import torch
 from transformers import AutoTokenizer, EsmForProteinFolding
 from transformers.models.esm.openfold_utils.protein import to_pdb, Protein as OFProtein
 from transformers.models.esm.openfold_utils.feats import atom14_to_atom37
 
+
 #Load in model and tokenizer
 tokenizer = AutoTokenizer.from_pretrained("facebook/esmfold_v1")
-
 model = EsmForProteinFolding.from_pretrained("facebook/esmfold_v1", low_cpu_mem_usage=True)
 model = model.to() #transfering model to GPU
 model.trunk.set_chunk_size(64) #reduce chunk size to use less memory
 
-##WORKS UP TO HERE###
 
 #convert model output to PDB file - ESMFold repo function
 def convert_to_pdb(outputs):
+    """
+    This function is sourced fro the ESMFold repo as a function to convert the model output
+    into a PDB file for 3D rendering. It is utilized in the function tokenize_sequences. 
+    """
     final_atom_positions = atom14_to_atom37(outputs["positions"][-1], outputs)
     outputs = {k: v.to("cpu").numpy() for k, v in outputs.items()}
     final_atom_positions = final_atom_positions.cpu().numpy()
@@ -44,21 +53,13 @@ def convert_to_pdb(outputs):
         pdbs.append(to_pdb(pred))
     return pdbs
 
-#tokenize input sequences from file
-def remove_first_line(input_file, output_file):
-    with open(input_file, "rb") as f_input:
-        # Skip the first line
-        next(f_input)
-        # Read the rest of the lines
-        lines = f_input.readlines()
-    
-    # Write the remaining lines to the output file
-    with open(output_file, "w") as f_output:
-        f_output.writelines(lines)
-
-
         
 def tokenize_sequences(input_folder, output_folder):
+    """
+    This function takes in a folder of sequences (Sequences), tokenizes them, applies the predictive model and outputs 
+    the tokenized predicted model files to a folder (Tokens). It is used in conjunction with the function convert_to_pdb in order to 
+    generate the full PDB formatted files.
+    """
     for filename in os.listdir(input_folder):
         input_file = os.path.join(input_folder, filename)
         gene_name = os.path.splitext(filename)[0]
@@ -74,6 +75,11 @@ def tokenize_sequences(input_folder, output_folder):
                 output_file = os.path.join(gene_folder, f"{gene_name}_sequence{i+1}.pdb")
                 torch.save(pdb, output_file)
 
+
+
+
+####USER INPUT AREA####
+#Will be added to main eventually#
 
 
 # Path to the input file containing protein sequences

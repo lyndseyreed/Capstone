@@ -5,6 +5,9 @@
     #parse for gene name in the first canonical sequence
     #parse for sequence information and extract unique sequences 
     #save canonical and corresponding novel sequences in a file by canoncial sequence gene name 
+
+
+
 #Output: file with the gene name as the file name and the sequences as a list in the file within "Sequences" folder
 
 
@@ -79,8 +82,8 @@ def process_input_folder(input_folder):
 ####USER INPUT AREA####
 #Will be added to main eventually#
 
-#input folder name:
-input_folder = "Input"
+# #input folder name:
+# input_folder = "Input"
 
-process_input_folder(input_folder)
+# process_input_folder(input_folder)
 
