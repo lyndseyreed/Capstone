@@ -10,9 +10,6 @@
 
 #Output: file with the gene name as the file name and the sequences as a list in the file within "Sequences" folder
 
-
-#####NEED TO ELIMINATE SPECIAL TOKENS IN PROCESSING FOR ESMFOLD#######
-
 #pip install --upgrade biopython
 
 import os

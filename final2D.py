@@ -1,5 +1,5 @@
 import sequence_extractor as seqextract 
-import prediction_generator_binary as pgb
+import prediction_generator_binary as pg
 # import remove_binary_to_pdb as pdb 
 # import model_generator as generate
 
@@ -7,7 +7,7 @@ import prediction_generator_binary as pgb
 
 def main(folder_path):
     seqextract.process_input_folder("Input")
-    pgb.
+    pg.
 
 
 
