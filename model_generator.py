@@ -19,7 +19,7 @@ import os
 #Calling Streamlit widgets
 st.sidebar.title('L.Reed Capstone 2024')
 st.sidebar.write('[*ESMFold*](https://esmatlas.com/about)  is utilized to render predicted 3D models and displays each canoncial sequence alongside the novel sequence(s).')
-st.file_uploader("Uplaod the fasta file you wish to 3D model", accept_multiple_files=True)
+st.file_uploader("Upload the fasta file you wish to 3D model", accept_multiple_files=True)
 st.button("Model!", type="primary")
 style = st.sidebar.selectbox('Style', ['cartoon', 'stick', 'sphere'])
 gene_files = os.listdir("PDB")

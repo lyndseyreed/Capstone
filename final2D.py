@@ -5,7 +5,7 @@ import prediction_generator_binary as pg
 
 
 
-def main(folder_path):
+def (folder_path):
     seqextract.process_input_folder("Input")
     pg.
 

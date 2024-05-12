@@ -57,7 +57,7 @@ def convert_to_pdb(outputs):
 def tokenize_sequences(input_folder, output_folder):
     """
     This function takes in a folder of sequences (Sequences), tokenizes them, applies the predictive model and outputs 
-    the tokenized predicted model files to a folder (Tokens). It is used in conjunction with the function convert_to_pdb in order to 
+    the tokenized predicted model files to a folder (Tokens). It is used in conjunction with the function convert_to_pdb to 
     generate the full PDB formatted files.
     """
     for filename in os.listdir(input_folder):
