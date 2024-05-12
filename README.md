@@ -49,7 +49,6 @@ python3 remove_binary_to_pdb.py
 streamlit run model_generator.py
 ```
 
-
 **11MAY24: Please note that this project is a work in progress, there are additional files that are not currently in use but will be deployed at a later date. The model prediction currently takes an extended period of time and computational power and will be improved or replaced.**
 
 ## Third Party Code Citation
